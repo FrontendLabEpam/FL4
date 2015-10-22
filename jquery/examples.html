@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery examples</title>
+  <link rel="stylesheet" href="assets/css/examples.css">
+  <script src="../assets/js/lib/jquery-2.1.1.js"></script>
+</head>
+
+<body class="block">
+  <!-- select und traverse example -->
+  <div id="select_me" class="block">
+    <p class="reddy">A simple p tag</p>
+    <p class="greenny">Another simple p tag</p>
+    <p class="greenny">Another simple p tag</p>
+    <p>
+      <label>Checked
+        <input type="checkbox" checked="checked">
+      </label>
+      <input type="text" value="Vasya" />
+    </p>
+    <p>
+      <a href="jquery.html">should not lead to jquery.html</a>
+    </p>
+  </div>
+  <!-- end -->
+
+  <!-- as if a real world example -->
+  <div id="app" class="block">
+
+    <button id="load_users_btn">Load Users</button>
+
+    <div class="loader">
+      <div></div>
+    </div>
+
+    <table id="users_grid" class="grid_table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Balance</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <!-- end -->
+
+  </div>
+</body>
+<script>
+$(document).ready(function() {
+  var button = $('#load_users_btn');
+
+  button.click(function() {
+    $(this).hide();
+    $('#app .loader').show();
+
+    setTimeout(function() {
+      $.getJSON('assets/users.json', function(data) {
+        data.forEach(function(user) {
+          var tr = '<tr><td>' + user.name + '</td><td>' + user.balance + '</td></tr>';
+          $('#users_grid tbody').append($(tr));
+        });
+        $('#users_grid').show();
+        $('#app .loader').hide();
+      });
+    }, 2000);
+  });
+});
+</script>
+
+</html>

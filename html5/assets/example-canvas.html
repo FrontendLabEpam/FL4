@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas example</title>
+  <script>
+    function draw() {
+      var canvas = document.getElementById("rectangles");   // Get canvas element
+      if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");             // Draw here
+        ctx.fillStyle = "rgb(200,0,0)";                // Red fill color
+        ctx.fillRect (10, 10, 55, 50);                 // Create a red rectangle
+        ctx.fillStyle = "rgba(0, 0, 200, 0.5)";        // Blue fill color
+        ctx.fillRect (30, 30, 55, 50);                 // Create a second rectangle
+      }
+    } 
+  </script>
+ </head>
+ <body onload="draw();">
+    <!-- provide alternative content -->
+    <canvas id="rectangles" width="150" height="150">
+      <img src="../../assets/img/logo.png" width="150" height="150" alt="Epam logo" />
+    </canvas>
+ </body>
+</html>

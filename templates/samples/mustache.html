@@ -1,0 +1,35 @@
+<body>
+  <div id="target"></div>
+
+  <script type="x-template" id="main">
+    <h1>List of users</h1>    
+    <ul>
+      {{#users}}
+        {{> user}}
+      {{/users}}
+    </ul>
+  </script>
+
+  <script type="x-template" id="user">
+    <li>
+      <span>Name: {{name}}</span>,
+      {{#surname}}
+        Surname: {{surname}}
+      {{/surname}}
+      {{^surname}}
+        <i>No surname specified</i>
+      {{/surname}}
+    </li>
+  </script>
+
+  <script src="lib/mustache.js"></script>
+  <script src="common/common.js"></script>
+  <script src="common/users.js"></script>
+
+  <script>
+    // Mustache.render(mainTemplate, context, partials);
+    $('target').innerHTML = Mustache.render($tpl('main'), users, {
+      user: $tpl('user')
+    });
+  </script>
+</body>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MVC, MVP, MVVM</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../assets/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/typography.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      .remark-inline-code{
+        font-size: 18px;
+        color: #333;
+        background: #f8f8f8;
+      }
+    </style>
+</head>
+<body>
+    
+<div class="wrapper">
+    <header class="mainheader">
+        <div class="logo">
+            <div class="divider"><a href="../index.html"><img src="../assets/img/Logo.png"></a></div>
+            <a href="../mvc/index.html#1"><span class="logotext">MVC, MVP, MVVM</span></a>
+        </div>
+    </header>
+</div>
+<!-- ================== Slides ================== -->
+    <textarea id="source">
+
+
+class: center, middle
+
+.title[
+Front-end training
+# MVC, MVP, MVVM
+]
+
+
+
+---
+
+
+
+# MVC
+
+.img-wrap-70[![MVC](assets/img/mvc.png)]
+
+- Model–View–Controller (MVC) is a software architectural pattern for implementing user interfaces.
+- Since 1979 (Trygve Reenskaug). Smalltalk-80 (Jim Althoff)
+- It divides a given software application into three interconnected parts, so as to separate internal representations of information from the ways that information is presented to or accepted from the user.
+
+
+---
+
+
+
+# MVC + JS
+
+.img-wrap-70[![MVC-js](assets/img/mvc-js.png)]
+
+- Model–View–Controller (MVC) is a software architectural pattern for implementing user interfaces.
+- Since 1979 (Trygve Reenskaug). Smalltalk-80 (Jim Althoff)
+- It divides a given software application into three interconnected parts, so as to separate internal representations of information from the ways that information is presented to or accepted from the user.
+
+
+---
+
+# MV* illustration
+
+.img-wrap-70[![MVC-js](assets/img/mvo-1.png)]
+
+
+---
+
+# MV* illustration
+
+.img-wrap-70[![MVC-js](assets/img/mvo-2.png)]
+
+---
+
+# Model
+
+```javascript
+    var ModelExample = function (data){    
+        this.name = data.name;
+        this.surname = data.surname;
+        return this;
+    };
+```
+Model is where the application’s data objects are stored.
+- Doesn’t know anything about views and controllers.
+- Notifies its associated views and controllers when there has been a change in its state.
+- May have additional features: conversions, validations, computed properties, access control.
+
+
+
+
+---
+
+# View
+
+```javascript
+    var ViewExample = function (model){
+        this.model = model;    
+        this.render = function (){
+            $('#user-info').text(this.model.name + ' ' + this.model.surname);
+        }
+        return this;
+    };
+```
+View requests information from the model that it needs for generating an output representation to the user.
+
+- Doesn’t care how to get the data or where the data comes from.
+
+- May use the existing HTML or may build new HTML
+
+---
+
+# Controller
+
+```javascript
+    var ControllerExample = function () {
+        this.init = function () {
+            var model = new ModelExample({
+                name: 'Vova',
+                surname: 'Putin'
+            });
+            var view = new ViewExample(model);
+        }
+        return this;
+    };
+```
+Decision maker and the glue between the model and view.
+
+- Updates the model when the user manipulates the view
+
+---
+
+# MVP
+
+.img-wrap-70[![MVP](assets/img/mvp.png)]
+
+- Model-view-presenter (MVP) is a derivative of the MVC design pattern which focuses on improving presentation logic.
+- Since 1990 (Taligent)
+- Presenter is a component which contains the user-interface business logic for the view
+- Passive View
+
+---
+
+# MVVM
+
+.img-wrap-70[![MVVM](assets/img/mvvm.png)]
+
+- MVVM (Model View ViewModel) is an architectural pattern based on MVC and MVP, which attempts to more clearly separate the development of user-interfaces (UI) from that of the business logic and behaviour in an application.
+- Since 2005 (Silverlight)
+- KnockoutJS, Kendo MVVM 
+
+---
+
+# ViewModel
+
+```javascript
+    function ViewModel() {
+        this.presidents = ko.observableArray([
+            {name: 'Vova', surname: 'Putin'},
+            {name: 'Barack', surname: 'Obama'},
+        ]);
+        this.onButtonClick = function () {
+            alert('click');
+        };
+    }
+
+    ko.applyBindings(new ViewModel());
+```
+The ViewModel can be considered a specialized Controller that acts as a data converter. 
+
+- Changes Model information into View information passing commands from the View to the Model.
+
+---
+
+# Template(View)
+
+```html
+    <ul data-bind="foreach: presidents">
+        <li>
+            <span data-bind="text: name"></span>
+            <span data-bind="text: surname"></span>
+        </li>
+    </ul>
+    <a data-bind="click: onButtonClick">Button</a>
+```
+View is simply a HTML document with declarative bindings to link it to the ViewModel
+
+- Displays information from the ViewModel, pass commands to it
+- Specific syntax.
+
+---
+
+# MVC vs MVP vs MVVM
+
+What should I use?
+
+- Data binding (MVVM)
+- Connection between the view and the rest of the program is not always available (MVC)
+- Any other case (MVP)
+
+---
+
+
+
+# Related resources
+- [Udacity course: JavaScript Design Patterns](https://www.udacity.com/course/javascript-design-patterns--ud989)
+- [TodoMVC - Helping you select an MV* framework](http://todomvc.com/)
+- [MVC app example: todo app](https://github.com/udacity/ud989-retain)
+- [MVC app example: pizza app](https://github.com/udacity/ud989-pizzamvo)
+
+
+
+
+    </textarea>
+<!-- ================== End of Slides ================== -->
+
+    <script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+</body>
+</html>

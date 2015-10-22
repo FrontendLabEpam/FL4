@@ -1,0 +1,47 @@
+//colors
+$white: white;
+$color_spray_approx: #7fdbff;
+$white_15: rgba(255, 255, 255, 0.15);
+$white_50: rgba(255, 255, 255, .5);
+
+//fonts
+$font_main: Lato;
+$font_fallback: sans-serif;
+
+body {
+  font-family: $font_main, $font_fallback;
+  font-weight: 300;
+  font-size: 112.5%;
+  color: $white;
+  background: $color_spray_approx;
+  padding: 4em 1em;
+  text-align: center;
+  line-height: 1.4;
+}
+h1 {
+  margin-top: 0;
+  font-size: 2em;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+.address-book {
+  max-width: 20em;
+  margin: 2em auto 0;
+  padding: 1em;
+  background: $white_15;
+  text-align: left;
+  border-radius: .5em;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    border-width: 1px 0 0 0;
+    border-color: $white_50;
+    border-style: solid;
+    &:last-child {
+      border-width: 1px 0;
+    }
+  }
+}

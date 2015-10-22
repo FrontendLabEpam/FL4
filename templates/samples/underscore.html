@@ -1,0 +1,34 @@
+<body>
+  <div id="target"></div>
+
+  <script type="x-template" id="main">
+    <h1>List of users</h1>    
+    <ul>
+      <% for (var i = 0; i < users.length; i++) {
+        print(user(users[i]));
+      } %>
+    </ul>
+  </script>
+
+  <script type="x-template" id="user">
+    <li>
+      <span>Name: <%= name %>,
+      <% // note, if use just 'surname' ReferenceError: surname is not defined %>
+      <% if (typeof surname != 'undefined') { %>
+        Surname: <%= surname %>
+      <% } else { %>
+        <i>No surname specified</i>
+      <% } %>
+    </li>
+  </script>
+
+  <script src="lib/underscore.js"></script>
+  <script src="common/common.js"></script>
+  <script src="common/users.js"></script>
+  <script>
+    var compiledMain = _.template($tpl('main'));
+    var compiledUser = _.template($tpl('user'));
+    users.user = compiledUser; // make 'partial' avalable inside main template
+    $('target').innerHTML = compiledMain(users);
+  </script>
+</body>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="http://code.angularjs.org/1.3.1/angular.js"></script>
+</head>
+<body>
+  <div ng-app="app" ng-controller="Ctrl">
+    <button ng-click="prooveClick('clicked')">Click me!</button>
+    <alert-btn></alert-btn>
+  </div>
+
+  <script>
+  angular.module('app', [])
+    .controller('Ctrl', function($scope){
+      $scope.prooveClick = function(msg){ alert(msg) };
+    })
+    .directive('alertBtn', function(){
+      return {
+        replace: true,
+        template: '<button ng-click="prooveClick(\'clicked directive\')">Click directive!</button>'
+      }
+    });
+  </script>
+</body>
+</html>

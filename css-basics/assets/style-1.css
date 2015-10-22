@@ -1,0 +1,9 @@
+h1 {
+  color: #000080;
+  font-size: 200%;
+  text-align: center;
+}
+p {
+  padding: 20px;
+  background: yellow;
+}

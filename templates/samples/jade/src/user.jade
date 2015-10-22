@@ -1,0 +1,7 @@
+mixin user(val)
+  li
+    span Name: #{val.name}, 
+    if val.surname
+      span Surname: #{val.surname}
+    else
+      i No surname specified

@@ -1,0 +1,11 @@
+<body>
+  <div id="target"></div>
+
+  <script src="compiled/templates.js"></script>
+  <script src="../common/common.js"></script>
+  <script src="../common/users.js"></script>
+
+  <script>
+    jade.render($('target'), 'main', users);
+  </script>
+</body>

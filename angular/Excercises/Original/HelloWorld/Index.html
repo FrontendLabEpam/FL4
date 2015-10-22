@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" ng-app="TrainingIntro">
+<head>
+  <meta charset="utf-8">
+  <title>Hello World</title>
+</head>
+<body ng-controller="MainController">
+  <h1 ng-bind="message"></h1>
+  <input type="text" ng-model="message">
+  <div ng-controller="SecondController">
+    <h2 ng-bind="message2"></h2>
+    <h2 ng-bind="message2"></h2>
+    <input type="text" ng-model="message2">
+  </div>
+
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="better.js"></script>
+  <script type="text/javascript" src="module.js"></script>
+  <script type="text/javascript" src="SecondController.js"></script>
+  <script type="text/javascript" src="MainController.js"></script>
+</body>
+</html>

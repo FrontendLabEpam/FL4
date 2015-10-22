@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  flex-direction: column;
+}
+button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #333;
+  background-color: #fff;
+  border-color: #9f9f9f;
+}
+button:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  min-height: 300px;
+  padding: 5px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.1);
+}
+p {
+  padding: 5px;
+  margin: 5px;
+}
+.greenny{
+  background-color: rgba(128,205,0,0.8);
+}
+.reddy{
+  background-color: rgba(255,30,0,0.8);
+}
+.grid_table {
+  border-collapse: collapse;
+}
+.grid_table thead tr td{
+  background: #999;
+}
+.grid_table td{
+  padding: 3px;
+  border: 1px solid #999;
+}
+/* SELECT EXAMPLE */
+#select_me{
+  display: block;
+  margin-bottom: 10px;
+}
+/* APP EXAMPLE */
+#app .grid_table, #app .loader {
+  display: none;
+}
+/* LOADER */
+
+.loader {
+  width: 20px;
+  height: 20px;
+}
+.loader > div {
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+  margin: 0 auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+}
+@-webkit-keyframes rotateplane {
+  0% {
+    -webkit-transform: perspective(120px)
+  }
+  50% {
+    -webkit-transform: perspective(120px) rotateY(180deg)
+  }
+  100% {
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+  }
+}
