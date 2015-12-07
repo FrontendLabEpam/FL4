@@ -36,26 +36,16 @@ Front-end training
 
 
 
-# Why HTML5?
+# HTML5 Features.
 
-- Because HTML5 takes a pragmatic approach, fixing common real-world problems (required attribute in form elements replaces javascript validation).
 - Simplified Markup
-- HTML5 provides native support for many features that were possible only with plugins or complex hacks (audio/video, drawing, sockets)
-- HTML5 is Secure by Default (Defines secure cross-origin sharing)
+- New semantic tags and attributes
+- Audio, video support
+- New graphic elements
+- New form control attributes
+- New HTML5 API's
 
 
-
----
-
-
-
-# Simplified markup
-
-## HTML4:
-
-.center[
-  ![html4 markup](assets/img/markup-html4.png)
-]
 
 
 ---
@@ -64,18 +54,28 @@ Front-end training
 
 # Simplified markup
 
-## HTML5:
+``` html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Template Page</title>
+    <link rel="stylesheet" href="path/to/stylesheet.css" />
+    <script src="path/to/script.js"></script>
+</head>
+<body>
 
-.center[
-  ![html5 markup](assets/img/markup-html5.png)
-]
+</body>
+</html>
+```
+
 
 
 
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 
 .columns[.col-40[
 - `<article>`
@@ -88,10 +88,6 @@ Front-end training
 - `<footer>`
 
 ].col-40[
-- `<details>`
-- `<summary>`
-- `<hgroup>`
-- `<time>`
 - `<mark>`
 - `<audio>`
 - `<video>`
@@ -106,77 +102,170 @@ Front-end training
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 ##`<section>` 
-The section element represents a generic section of a document or application. A section, in this context, is a thematic grouping of content, typically with a heading.
+Represents a generic document or application section. In this context, a section is a thematic grouping of content, typically with a header, possibly with a footer. Examples include chapters in a book, the various tabbed pages in a tabbed dialog box, or the numbered sections of a thesis. A web site's home page could be split into sections for an introduction, news items, contact information.
+``` html
+<section>
+    <h1>Level 1</h1>
+    <section>
+        <h1>Level 2</h1>
+    </section>
+</section>
+``` 
 
 
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 ##`<article>`
-A self-contained composition in a document, page, application, or site and that is intended to be independently distributable or reusable, e.g. in syndication. For example: a forum post, a magazine or newspaper article, a blog entry, a user- submitted comment, etc.
-
+Represents a section of a page that consists of a composition that forms an independent part of a document, page, or site. This could be a forum post, a magazine or newspaper article, a Web log entry, a user-submitted comment, or any other independent item of content.
+``` html
+<article>
+    <header>
+        <h4><a href="#comment-2" rel="bookmark">Comment #2</a>
+        by <a href="http://example.com/">Jack Osborne</a></h4>
+    </header>
+    <p>Pellentesque habitant morbi tristique senectus.</p>
+</article>
+``` 
 
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 ##`<nav>` 
-The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links. Only sections that consist of major navigation blocks are appropriate for the nav element.
+Represents navigation for a document. The nav element is a section containing links to other documents or to parts within the current document.
 
+Not all groups of links on a page need to be in a nav element — only groups of primary navigation links. In particular, it is common for footers to have a list of links to various key parts of a site, but the footer element is more appropriate in such cases.
+``` html
+<nav>
+    <ul>
+        <li>Nav Link</li>
+        <li>Nav Link</li>
+        <li>Nav Link</li>
+    </ul>
+</nav>
+```
 
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 ##`<aside>`
-Represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content.
-
+Represents a section of a page consisting of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
+``` html
+<aside>
+    <h2>Blogroll</h2>
+    <ul>
+        <li><a href="#">My Friend</a></li>
+        <li><a href="#">My Other Friend</a></li>
+        <li><a href="#">My Best Friend</a></li>
+    </ul>
+</aside>
+```
 
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 ##`<header>`
-Represents a group of introductory or navigational aids.
-
-
+Represents the "header" of a document or section of a document. The header element is typically used to group a set of h1–h6 elements to mark up a page's title with its subtitle or tagline. header elements may, however, contain more than just the section's headings and subheadings — e.g., version history information or publication date.
+``` html
+<header>
+    <h1>Header string</h1>
+    <p>Other content</p>
+</header>
+```
 ---
 
 
-# New HTML5 Elements
+# New Semantic Tags
 ##`<footer>` 
-Represents a footer for its nearest ancestor sectioning content or sectioning root element.
-Typically contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
+Represents the "footer" of a document or section of a document. The footer element typically contains metadata about its enclosing section, such as who wrote it, links to related documents, copyright data, etc. Contact information for the section given in a footer should be marked up using the address element.
 
 ---
 
+# New Semantic Tags
+##`<figure>, <figcaption>`
+The figure element represents some flow content, optionally with a caption, that is self-contained and is typically referenced as a single unit from the main flow of the document.
 
-# New HTML5 Elements
-##Page layout
+The figure element can be used to annotate illustrations, diagrams, photos, code listings, etc., that are referenced in the main content of the document, but that could, without affecting the flow of the document, be moved away from that primary content — e.g., to the side of the page, to dedicated pages, or to an appendix.
+``` html
+<figure>
+    <img ... > (or video, table etc)
+    <figcaption>A rabid unicorn goring a fairy.</figcaption>
+</figure>
+```
+---
+
+# New Semantic Tags
+##`<mark>` 
+Represents a run of text in one document marked or highlighted because of its relevance in another context.
+
+When used in a quotation or other block of text referenced in a document, it indicates a highlight that was not present in the original document — e.g., a portion of text in an academic publication that has recently come under additional scrutiny.
+
 .columns[.col-50[
-  ![html5 markup](assets/img/html4-layout.png)
-].col-50[
-  ![html5 markup](assets/img/html5-layout.png)
+``` html
+In this sentence we will be using 
+the mark element. <mark>HTML5</mark> 
+Can you see where it has been used?
+```
+].col-50.demo[
+In this sentence we will be using 
+the mark element. <mark>HTML5</mark> 
+Can you see where it has been used?
 ]]
-
-
 ---
 
+# New Semantic Tags
+##`<audio>` 
+Represents a sound or audio stream.
+
+Content may be nested inside the audio element. User agents should not show this content to the user. Authors should use this content to force older browsers to use a legacy audio plugin or to inform the user of how to access the audio content.
+
+.columns[.col-50[
+``` html
+<audio src="music.oga" controls>
+    <a href="music.oga">Download song</a>
+</audio>
+```
+].col-50.demo[
+<audio src="http://www.w3schools.com/html/horse.ogg" controls>
+    <a href="music.oga">Download song</a>
+</audio>
+]]
+---
+
+# New Semantic Tags
+##`<video>` 
+Represents a video or movie.
+
+.columns[.col-60[
+Content may be nested inside the video element. User agents should not show this content to the user. Authors should use this content to force older browsers to use a legacy video plugin or to inform the user of how to access the video content.
+
+``` html
+<video src="video.ogv" controls 
+poster="poster.jpg" width="240" height="240">
+    <a href="video.ogv">Download song</a>
+</video>
+```
+].col-40.demo[
+<video src="http://www.w3schools.com/html/mov_bbb.mp4" controls poster="poster.jpg" width="240" height="240">
+    <a href="video.ogv">Download song</a>
+</video>
+]]
+---
 
 #SVG and Canvas
 
 - Provide native drawing functionality
-- Previously possible only with plugins (Flash, Silverlight)
 - Completely integrated into HTML5 documents (part of DOM)
 - Can be styled with CSS
 - Can be controlled with JavaScript
 - Use for animation, charts, images, pixel manipulation, and so on 
 - Canvas supports 2D and 3D (WebGL)
-- Will impact animated graphics and diagrams soon (use libraries)
-
 
 ---
 
@@ -336,85 +425,6 @@ With SVG, the freedom exists to style individual elements within an icon, which 
 
 ---
 
-# Video in HTML5
-The HTML `<video>` element is used to embed video content. It may contain several video sources, represented using the src attribute or the `<source>` element; the browser will choose the most suitable one.
-
-- Native audio and video (no plugins required)
-- Programmable with JavaScript
-- Style with CSS
-- One `<video>` element can link to multiple video files, and the browser will choose the first video it can actually play.
-- It is up to you to know which browsers support which containers and codecs.
-- Provides a rich Video API
-
-
----
-
-
-# Video in HTML5
-``` html
-<video width="320" height="240" controls autoplay poster="html5.png">
-    <source src="somefile.mp4" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'" />
-    <source src="somefile.webm" type="video/webm; codecs='vp8, vorbis'" />
-    <source src="somefile.ogv" type="video/ogg; codes='theora, vorbis'" />
-    <track label="English" kind="subtitles" srclang="en" src="subtitles_en.vtt">
-    A movie about HTML 5
-    <!-- provide Flash player fallback here -->
-</video>
-```
-
-
----
-
-
-# Video in HTML5
-Simple example
-
-``` html
-<video width="400" controls>
-    <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-    <source src="http://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
-    Your browser does not support HTML5 video.
-</video>
-```
-<br>
-.demo[
-<video width="400" controls>
-    <source src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-    <source src="http://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
-    Your browser does not support HTML5 video.
-</video>
-]
-
----
-
-
-#HTML5 Audio
-HTML5 provides a standard for playing audio files.
-
-- Before HTML5, there was no standard for playing audio files on a web page.
-- Before HTML5, audio files could only be played with a plug-in (like flash).
-- The HTML5 `<audio>` element specifies a standard way to embed audio in a web page.
-
-``` html
-<audio controls>
-  <source src="horse.ogg" type="audio/ogg">
-  <source src="horse.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-```
-
-<br>
-.demo[
-<audio controls>
-  <source src="http://www.w3schools.com/html/horse.ogg" type="audio/ogg">
-  <source src="http://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-]
-
-
----
-
 
 # Device Access
 - Speech Input
@@ -513,23 +523,6 @@ Name: <input type="text" placeholder="Enter your name here" style="width:300px;"
 
 ---
 
-# Polyfills
-
-In web development, a polyfill is downloadable code which provides facilities that are not built into a web browser. It implements technology that a developer expects the browser to provide natively, providing a more uniform API landscape. For example, many features of HTML5 are not supported by versions of Internet Explorer older than version 8 or 9, but can be used by web pages if those pages install a polyfill
-
-## Examples
-- html5shiv
-- -prefix-free
-- Selectivizr
-- Flexie
-- CSS3 PIE
-- JSON 2
-- es5-shim
-- FlashCanvas
-- MediaElement.js
-
----
-
 #HTML5 Shiv
 
 HTML5Shiv is a JavaScript workaround, invented by Sjoerd Visscher, to enable styling of HTML5 elements in versions of Internet Explorer prior to version 9, which do not allow unknown elements to be styled without JavaScript. HTML5Shiv is calling `document.createElement("tagname")` for each of the new HTML5 elements, which causes IE to parse them correctly. It also includes basic default styling for those HTML5 elements.
@@ -552,7 +545,6 @@ HTML5Shiv is a JavaScript workaround, invented by Sjoerd Visscher, to enable sty
 
 
 ---
-
 
 
 # Additional links
