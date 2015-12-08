@@ -252,7 +252,7 @@ poster="poster.jpg" width="240" height="240">
 </video>
 ```
 ].col-40.demo[
-<video src="http://www.w3schools.com/html/mov_bbb.mp4" controls poster="poster.jpg" width="240" height="240">
+<video src="http://www.w3schools.com/html/mov_bbb.mp4" controls width="240" height="240">
     <a href="video.ogv">Download song</a>
 </video>
 ]]
@@ -393,17 +393,6 @@ With SVG, the freedom exists to style individual elements within an icon, which 
 ---
 
 
-#Canvas example. 3D animation
-.center[
-  ![Canvas 3D animation demo](assets/img/canvas-3d.jpg)
-
-  [Canvas 3D animation demo](http://voxelrain.appspot.com/)
-]
-
-
----
-
-
 #Canvas example. Game
 .center[
   ![Canvas game demo](assets/img/canvas-game.png)
@@ -417,9 +406,9 @@ With SVG, the freedom exists to style individual elements within an icon, which 
 
 #Canvas example. Charts
 .center[
-  ![Canvas charts demo](assets/img/canvas-charts.png)
+  ![SVG charts demo](assets/img/canvas-charts.png)
 
-  [Canvas charts demo](http://www.highcharts.com/)
+  [SVG charts demo](http://www.highcharts.com/)
 ]
 
 
@@ -438,39 +427,6 @@ With SVG, the freedom exists to style individual elements within an icon, which 
 
 ---
 
-
-#Offline Web Applications
-.columns[.col-50[
-- Use complete web sites (documentation sets) in offline mode
-- Cache pages that have not been visited yet
-- Browsers cache data in an Application Cache
-- HTML5 allows online and offline detection
-- Allows prefetching of site resources (can speed up pages)
-- Simple manifest mechanism
-].col-50.demo[
-Example appcache File:
-```
-CACHE MANIFEST
-# manifest version 1.0.1 
-# Files to cache
-index.html
-cache.html
-html5.css
-image1.jpg
-img/foo.gif
-http://www.example.com/styles.css
-
-# Use from network if available
-NETWORK:
-network.html
-
-# Fallback content
-FALLBACK:
-/ fallback.html
-```
-]]
-
----
 
 #HTML5 Shiv
 
@@ -797,23 +753,23 @@ The for attribute of the <label> tag should be equal to the id attribute of the 
 
 Example 1:
 ```html
-<label for="userName">Enter your name:</label>
-<input type="text" name="username" id="userName" value="Yuriy Dzhavala" />
+<label for="userName1">Enter your name:</label>
+<input type="text" name="username" id="userName" value="Author Name" />
 ```
 Example 2:
 ``` html
 <label>
   Enter your name:
-  <input type="text" name="username" value="Yuriy Dzhavala" />
+  <input type="text" name="username" value="Author Name" />
 </label>
 ```
 <br>
 .columns[.col-50.demo[
-<label for="userName">Enter name:</label> <input type="text" name="username" id="userName" value="Yuriy Dzhavala" />
+<label for="userName1">Enter name:</label> <input type="text" name="username" id="userName1" value="Author Name" />
 ].col-50.demo[
 <label>
   Enter name:
-  <input type="text" name="username" value="Yuriy Dzhavala" />
+  <input type="text" name="username" value="Author Name" />
 </label>
 
 ]]
@@ -941,6 +897,11 @@ Pattern attribute match input to custom regular expression:
 <input type="submit" value="submit">
 </form>
 ]]
+
+---
+
+# Lets Practice
+<a href="https://www.dropbox.com/s/2sb7jx5awp98v32/form.jpg?dl=0#">Layout</a>
 
     </textarea>
 <!-- ================== End of Slides ================== -->
