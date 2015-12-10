@@ -224,9 +224,6 @@ All described methods of using CSS can be used either alone or in combination wi
 # Device types
 
 - `all` - All types. This value is used by default.
-- `aural` - speech synthesizers, as well as programs to reproduce text aloud (speech browsers).
-- `braille` - devices based on a system of signage that are designed for blind people.
-- `handheld`- handheld computers and similar devices.
 - `print` - printer.
 - `projection` - projector.
 - `screen` - the screen.
@@ -385,7 +382,7 @@ Color:
 
 Dimensions. Relative units:
 ``` css
-em, rem, ex, px, %
+em, rem, px, %
 ```
 Dimensions. Absolute units:
 ``` css
@@ -554,7 +551,7 @@ p {
 ---
 
 
-# Siblings selectors
+# Next selectors
 
 ``` html
 <style>
@@ -705,16 +702,16 @@ a[href$=".com"] {
 ```
 ].col-40.demo.demo-6[
 <!-- hardcoded style values here due to markdown quotes escaping bug -->
-<p><a style="color: red" href="http://mail.ru" target="_blank">External link to mail.ru</a></p>
-<p><a style="background: #fc0;" href="http://www.yandex.com">Yandex.com</a></p>
-<p><a style="background: yellow;" href="http://google.ru">Search the web</a></p>
+<p><a style="color: red" href="http://gmail.com" target="_blank">External link to gmail.com</a></p>
+<p><a style="background: #fc0;" href="http://www.yahoo.com">Yahoo.com</a></p>
+<p><a style="background: yellow;" href="http://google.com.ua">Search the web</a></p>
 <h3 title="block tag"  style="color: green;">Heading</h3>
 ]]
 
 ``` html
-<p><a href="http://mail.ru" target="_blank">External link to mail.ru</a></p>
-<p><a href="http://www.yandex.com">Yandex.com</a></p>
-<p><a href="http://google.ru">Search the web</a></p>
+<p><a href="http://gmail.com" target="_blank">External link to gmail.com</a></p>
+<p><a href="http://www.yahoo.com">Yahoo.com</a></p>
+<p><a href="http://google.com.ua">Search the web</a></p>
 <h3 title="block tag">Heading</h3>
 ```
 
@@ -991,14 +988,141 @@ float:left;
 
 ---
 
+# Background
 
+.columns[
+.col-50[
+``` css
+  background: 
+    url('http://lorempixel.com/100/100/') 
+    no-repeat 50px 50% grey;
+```
+
+].col-50[
+
+``` html
+    background-image: 
+      url('http://lorempixel.com/100/100/');
+    background-position: 50px 50%;
+    background-repeat: no-repeat;
+    background-color: grey;
+```
+&nbsp;
+.demo[
+<a href="assets/example-no-repeat.html">example-no-repeat.html</a>
+]]]
+
+---
+
+# Border
+
+.columns[
+.col-50[
+``` css
+    border: 3px solid black;
+```
+
+].col-50[
+
+``` html
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+
+    border-right: 3px;
+    border-right-width: 3px; 
+```
+&nbsp;
+.demo[
+<a href="assets/border.html">border.html</a>
+]]]
+
+---
+
+#Cursors
+
+<img src="assets/CSS-Custom-Cursors1.png" height="250" width="600">
+
+.columns[
+.col-100[
+``` css
+    a:hover {
+      cursor: pointer;
+    }
+```
+]]
+---
+
+# Font
+
+.columns[
+.col-100[
+``` css
+  font: font-style font-weight font-size/line-height font-family;
+  font: italic bold 16px/22px Arial, Verdana, sans-serif;
+```
+
+].col-100[
+
+<img src="assets/font-size-line-height.png" width="486">
+]]
+
+
+---
+
+# Text Indent
+
+.columns[
+.col-100[
+``` css
+  text-indent: 200px;
+```
+
+].col-100[
+
+<img src="assets/download.png" height="124" width="405">
+]]
+
+
+---
+
+
+# List Style
+
+.columns[
+.col-50[
+``` css
+    list-style: none;
+    list-style: square 
+      url('../img/dino.png') 
+      inside;
+```
+
+].col-50[
+
+``` html
+    list-style: square;
+    list-style: url('../img/dino.png');
+    list-style: inside;
+```
+&nbsp;
+.demo[
+<a href="assets/list.html">list.html</a>
+]]]
+
+
+---
+
+Let's play with selectors 
+<a href="http://flukeout.github.io/">CSS Selectors Game</a>
+
+---
 # Additional links
 
-- [Самоучитель HTML4 (htmlbook.ru/samhtml)](http://htmlbook.ru/samhtml)
-- [XHTML (htmlbook.ru/xhtml)](http://htmlbook.ru/xhtml)
-- [Интерактивные онлайн-курсы по HTML и CSS (htmlacademy.ru)](http://htmlacademy.ru/courses)
+- [Mozilla Developer Network (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [CSS Reference Htmlbook (http://htmlbook.ru/)](http://htmlbook.ru/)
 - [Codeacademy. Learn to code interactively, for free (codecademy.com)](http://www.codecademy.com/tracks/web)
-
+- [W3Schools CSS Reference](http://www.w3schools.com/css/default.asp)
 
 
     </textarea>
