@@ -183,48 +183,38 @@ If there is no border, padding, inline content, or clearance to separate the mar
 
 If there is no border, padding, inline content, height, or min-height to separate a block's margin-top from its margin-bottom, then **its top and bottom margins collapse**.
 ---
-class: left, middle
+## Visible
 
-# Backgrounds
+<img src="images/overflow-visible.png" height="500" width="570">
 
-You can specify the background of an element with block properties in a following way:
 
-```css
-    div {
-        background-color: #fff; //color of the block background
-        background-image: url(paper.jpg); // image for background
-        background-repeat: repeat; // repeat property of background
-        background-attachment: scroll; // attachment of background
-        background-position: center; // positioning 
-        background-clip: padding-box; // clipping
-        background-origin: padding-box; // origin of positioning
-        background-size: auto auto; // size
-    }
-```
 
 ---
-class: left, middle
 
-# Background shorthand
-```css
-    div {
-        background: #fff url(img.jpg) repeat scroll top;
-    }
-```
+## Overlap
 
-Where:
+<img src="images/overlap.png" height="200" width="570">
 
-```css
-    div{
-        background-color: #fff;
-        background-image: url(img.jpg);
-        background-repeat: repeat;
-        background-attachment: scroll;
-        background-position: top;
-    }
-```
 
-Further reading at <a href="http://css-tricks.com/almanac/properties/b/background/">css-tricks</a>
+---
+
+## Hidden
+
+<img src="images/css-overflow-hidden.png" height="461" width="570">
+
+---
+
+## Auto
+
+<img src="images/css-overflow-auto.png" height="540" width="570">
+
+
+---
+
+## Scroll
+
+<img src="images/css-scroll.png" height="540" width="570">
+
 
 ---
 
@@ -278,6 +268,7 @@ div {
   z-index: 1;
 }
 ```
+<img src="images/download.png" height="164" width="307">
 
 Z-index controls the vertical stacking of non-static blocks. The higher the value, the closer the item is on stack to the user.
 
@@ -359,7 +350,6 @@ class: left, middle
 # Additional links
 
 - [CSS-Tricks Almanac](http://css-tricks.com/almanac/)
-- [Интерактивные онлайн-курсы по HTML и CSS (htmlacademy.ru)](http://htmlacademy.ru/courses)
 - [Codecademy CSS lessons](http://www.codecademy.com)
 
 
