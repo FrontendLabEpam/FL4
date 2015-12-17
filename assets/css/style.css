@@ -19,7 +19,7 @@ h3 {
   margin: 10px 0 5px;
 }
 p, pre {
-  margin: 0 0 1em;
+  margin: 0 0 0.8em;
 }
 li {
   margin-top: 0;
@@ -88,9 +88,6 @@ dd {
   font-family: 'source_sans_proregular';
   line-height: 1.2;
 }
-.remark-slide-content p {
-  padding-bottom: 10px;
-}
 .remark-slide a {
   color: rgb(26, 156, 176);
 }
@@ -104,6 +101,7 @@ dd {
 }
 ul {
   margin-left: 30px;
+  margin-bottom: 1em;
 }
 .title {
   margin-top: -5em;
@@ -212,8 +210,9 @@ img {
   overflow: auto;
 }
 .remark-inline-code {
-  font-size: 24px;
-  color: black;
+  font-size: 18px;
+  color: #333;
+  background: #f8f8f8;   
 }
 .remark-code-line {
   padding-bottom: 5px;
