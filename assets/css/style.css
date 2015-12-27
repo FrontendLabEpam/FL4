@@ -269,6 +269,15 @@ img {
 .remark-slide-content h1 {
   font-size: 40px;
 }
+.remark-slide-content h2 {
+  font-size: 30px;
+}
+.remark-slide-content h3 {
+  font-size: 25px;
+}
+.remark-slide-content h1 + h2 {
+  margin-top: -20px;
+}
 .title h1 {
   font-size: 55px;
   font-weight: bolder;
