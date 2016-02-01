@@ -205,6 +205,8 @@ img {
   font-size: 12px;
   color: #fff;
 }
+
+/* CODE VIEW */
 .remark-code, .remark-inline-code {
   font-family: 'source_sans_proregular';
   overflow: auto;
@@ -212,11 +214,12 @@ img {
 .remark-inline-code {
   font-size: 18px;
   color: #333;
-  background: #f8f8f8;   
+  background: #f8f8f8;
 }
 .remark-code-line {
   padding-bottom: 5px;
 }
+
 .hljs-github .hljs-comment {
   font-style: normal
 }
@@ -224,6 +227,8 @@ img {
   font-family: 'source_sans_proregular';
   font-weight: bold;
 }
+/* end CODE VIEW */
+
 .title {
   margin-top: -5em;
 }
