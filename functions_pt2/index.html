@@ -9,7 +9,7 @@
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  
+
 <div class="wrapper">
   <header class="mainheader">
     <div class="logo">
@@ -35,14 +35,17 @@ Front-end training
 
 Functions have builtin properties:
 
-`.length` shows how many arguments function awaits to get.
+`.length` shows how many arguments function awaits to get.  
+`.name` shows function's name if there is one.
+```
+function isBigger(a, b) { return a > b; }
+var ib = isBigger;
 
-`(function(a, b){}).length // -> 2`
-
-`.name` show function name, if there is one (remember that function can be anonymous)
+ib.length; // -> 2
+ib.name; // -> "isBigger"
+```
 
 Also you may add your own properties to function and use them later:
-
 ```
 function runIfPropertySet() {
   if (runIfPropertySet.shouldRun) {
@@ -53,14 +56,13 @@ runIfPropertySet.shouldRun = true;
 runIfPropertySet(); // -> 'run'
 runIfPropertySet.shouldRun = false;
 runIfPropertySet(); // -> nothing
-
 ```
 
 ---
 
 # 'this' keyword
 
-In javascript `this` indicate current context in which function is called.
+In javascript `this` indicates current __context__ in which function is called.
 
 ```
 function showThis() {
@@ -70,33 +72,29 @@ function showThis() {
 
 There can be total 4 contexts:
 
+- __window__ if you simply call function  
+`showThis(); // -> window`
+
+- DOM element, if you call function as event listener  
+` document.body.onclick = showThis; // ... -> &lt;body...`
+
 - object, if you call function as method:
 ```
-var obj = {
-  fn: showThis
-};
+var obj = { fn: showThis };
 obj.fn(); // -> Object { fn: function }
 ```
 
-- `window` if you call function: `showThis(); // -> window`
-
-- DOM element, if you call function as event listener
-```
-document.body.onclick = showThis;
-// ... -> &lt;body...
-```
-
-- new object, if function used as constructor: `new showThis; // -> showThis {}`
+- new object, if function used as constructor:  
+`new showThis; // -> showThis {}`
 
 ---
 
 # More on calling functions
 
-There are 2 methods which allows you to change context:
+There are methods which allow you to change context:
 
 ```
 Function.call(context/*, comma-separated list of arguments */);
-
 Function.apply(context/*, list of arguments as array */);
 ```
 
@@ -121,84 +119,15 @@ If you pass `null` as context - your context will become `window`.
 
 ---
 
-# Recursion
+# Bind that 'this'
 
-A recursive function is a function which call itself.
-
-For example, function that find n-th element of fibonacci numbers:
+Bind does not call function immediately, it returns new function with "bound" context
 
 ```
-function fib(n) {
-  function fibIter(a, b, i) {
-    if (i > n) {
-      return b;
-    }
-    return fibIter(b, a + b, i + 1);
-  }
-  return fibIter(1, 1, 2);
-}
-
-fib(20);
-```
-
----
-
-# Recusion (cont.)
-
-But, fibonacci numbers is not what you need to do every day.
-
-Better example - function that build DOM according to given structure:
+var showObj2Value = obj.showValue.bind(obj2);
+showObj2Value(1, 2); // -> obj2 3
 
 ```
-function createEl(domObj) {
-  var el = document.createElement(domObj.tag);
-  if (domObj.children) {
-    for (var i = 0; i < domObj.children.length; i++) {
-      el.appendChild(createEl(domObj.children[i]));
-    }
-  }
-  return el;
-}
-
-createEl({
-  tag: 'div',
-  children: [
-    { tag: 'span' },
-    { tag: 'ul', children: [{ tag: 'li' }] }
-  ]
-});
-```
-
----
-
-# Callback functions
-
-A common JS practice is to pass some callback-function if result don&apos;t appear immidiately (think about calling to server...):
-
-```
-function executeLoop(fn, ms) {
-  if (fn) {
-    executeAfter.fns.push(fn);
-  } else {
-    setTimeout(function() {
-      for (var i = 0; i < executeLoop.fns.length; i++) {
-        executeLoop.fns[i]();
-      }
-      executeLoop(null, ms);
-    }, ms);
-  }
-}
-executeLoop.fns = [];
-
-// add some functions to execute
-executeLoop(function() {});
-executeLoop(function() {});
-executeLoop(function() {});
-
-// and start loop with 10 ms
-executeLoop(null, 10);
-```
-
 ---
 
 # Closures
@@ -226,65 +155,83 @@ alwaysSameContext.call(null); // -> 'custom-object'
 
 ---
 
-# And some more array methods
+# Recursion
 
-`[].forEach(fn)` execute function on each element of array. Arguments passed: (element, index, array)
+A recursive function is a function which calls itself.
 
-`[].map(fn)` execute function on each element of array and return array with results of fucntion calling on each element. Arguments passed: (element, index, array), return: new element
 
-`[].filter(fn)` filter array by given fn. Arguments passed: element; return: is element match or not
+```
+var factorial = function(number) {
+  if (number <= 0) { // terminal case
+    return 1;
+  } else { // block to execute
+    return (number * factorial(number - 1));
+  }
+};
 
-`[].every(fn)` indicate is every element matches to condition (which is function return result)
-
-`[].some(fn)` indicate does _any_ of element match to condition
-
-`[].reduce(fn, startValue)` "reduces" array to single-value. Arguments passed: (accumulatedValue, element)
+factorial(6); // -> 720
+```
 
 ---
 
-# Examples
+# Recursion (cont.)
+
+Function that builds DOM according to given config:
 
 ```
-var intArray = [1, 2, 3, 4, 5, 6, 7, 8];
-intArray.forEach(function(el) {
-  console.log(el * el);
-}); // -> 1, 4, 9, 16, 25, 36, 49, 64
+function createEl(domObj) {
+  var el = document.createElement(domObj.tag);
+  if (domObj.children) {
+    for (var i = 0; i < domObj.children.length; i++) {
+      el.appendChild(createEl(domObj.children[i]));
+    }
+  }
+  return el;
+}
 
-intArray.map(function(el) {
-  return el * el;
+createEl({
+  tag: 'div',
+  children: [
+    { tag: 'span' },
+    { tag: 'ul',
+      children: [
+        { tag: 'li' }
+      ]
+    }
+  ]
 });
-sqEls; // -> [1, 4, 9, 16, 25, 36, 49, 64]
-
-intArray.reduce(function(acc, el) {
-  return acc + el;
-}, 0); // -> 36
-
 ```
 
 ---
 
-# Examples (cont.)
+# Callback functions
+
+A common JS practice is to pass some callback-function if result don&apos;t appear immediately (think about calling to server...):
 
 ```
-intArray.filter(function(el) {
-  return el % 2 == 0;
-}); // [2, 4, 6, 8];
+function logTick() { console.log(Date.now()); }
 
-intArray.every(function(el) {
-  return el % 2 == 0;
-}); // false
+function executeLoop(fn, ms) {
+  if (fn) {
+    executeLoop.fns.push(fn);
+  } else {
+    setTimeout(function() {
+      for (var i = 0; i < executeLoop.fns.length; i++) {
+        executeLoop.fns[i]();
+      }
+      executeLoop(null, ms);
+    }, ms);
+  }
+}
+executeLoop.fns = [];
 
-intArray.every(function(el) {
-  return el > 0;
-}); // true
+// add some functions to execute
+executeLoop(logTick);
+executeLoop(logTick);
+executeLoop(logTick);
 
-intArray.some(function(el) {
-  return el % 2 == 0;
-}); // -> true
-
-intArray.some(function(el) {
-  return el < 0;
-}); // false
+// and start loop with 10 ms
+executeLoop(null, 100);
 ```
 
 ---
@@ -397,7 +344,7 @@ Delayed + Async execution
 ```
 $.on('button', 'click', function onClick() {
     setTimeout(function timer() {
-        console.log('You clicked the button!');    
+        console.log('You clicked the button!');
     }, 2000);
 });
 
@@ -416,10 +363,14 @@ console.log("Later!");
 # References
 
 - Event Loop - https://www.youtube.com/watch?v=8aGhZQkoFbQ
+- http://eloquentjavascript.net/05_higher_order.html
     </textarea>
 <!-- ================== End of Slides ================== -->
 
     <script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
-    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+    <script type="text/javascript">remark.create({
+      highlightStyle: 'github',
+      highlightLanguage: 'javascript'
+    });</script>
 </body>
 </html>
