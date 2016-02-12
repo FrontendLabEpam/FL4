@@ -9,7 +9,7 @@
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  
+
 <div class="wrapper">
   <header class="mainheader">
     <div class="logo">
@@ -117,8 +117,8 @@ teacher.describe(); // -> "Vasili Alibabayevich"
 This approach also called "mixin",  
 since you basically mix parent object methods and properties to your object.
 
-merge implementations: 
-[jQuery.extend](http://api.jquery.com/jQuery.extend/), 
+merge implementations:
+[jQuery.extend](http://api.jquery.com/jQuery.extend/),
 [underscore.extend](http://underscorejs.org/#extend),
 [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
 ---
@@ -228,7 +228,7 @@ cat.hasOwnProperty('sayName'); // false
 ```
 
 Prototype methods and properties are captured by `for..in` loop,  
-so if you don't need them - use `hasOwnProperty`. 
+so if you don't need them - use `hasOwnProperty`.
 
 ```
 for (var key in cat) {
@@ -277,7 +277,7 @@ If you need to change an object behaviour - you can rewrite prototype's object m
 
 ```
 Cat.prototype.sayName = function() {
-  return 'cat meows "' + this.name + '"'; 
+  return 'cat meows "' + this.name + '"';
 };
 
 var cat = new Cat('Kitty');
@@ -388,7 +388,7 @@ Composition also is a way to reuse existing functionality, w/o redefining it:
 - http://eloquentjavascript.net/06_object.html
 - http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/
 - [Common misconceptions about inheritance in js](https://medium.com/javascript-scene/common-misconceptions-about-inheritance-in-javascript-d5d9bab29b0a)
-
+- [Composition over Inheritance (video, 8min)](https://www.youtube.com/watch?v=wfMtDGfHWpA)
     </textarea>
 <!-- ================== End of Slides ================== -->
 
