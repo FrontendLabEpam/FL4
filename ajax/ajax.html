@@ -6,16 +6,11 @@
     <link href="../assets/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/fonts.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/typography.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/shCore.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
-    
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../assets/js/lib/shCore.js"></script>
-    <script type="text/javascript" src="../assets/js/lib/shBrushJScript.js"></script>
-    <script type="text/javascript" src="../assets/js/lib/shAutoloader.js"></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.all();
-    </script>
+    <style>
+      td {padding: 10px}
+      td:first-child { color: orangered }
+    </style>
 </head>
 <body>
 <div class="wrapper">
@@ -38,11 +33,7 @@ Front-end training
 # AJAX
 ]
 
-
-
 ---
-
-
 
 # AJAX
 
@@ -52,10 +43,7 @@ AJAX is a technique for creating fast and dynamic web pages.
 
 AJAX allows web pages to be updated asynchronously by exchanging small amounts of data with the server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.
 
-
 ---
-
-
 
 # AJAX transports
 
@@ -67,465 +55,174 @@ There ara couple Javascript object or HTML tags that can provide server-client c
 
 - Script
 
-
 ---
-
-
 
 # Data formats
 
 - Text
-    <pre class="brush: jscript">
-        elem.innerText = xhr.responseText
-    </pre>
+  ```
+  elem.innerText = xhr.responseText
+  ```
 
 - HTML
-    <pre class="brush: jscript">
-        elem.innerHTML = xhr.responseText
-    </pre>
+  ```
+  elem.innerHTML = xhr.responseText
+  ```
 
 - XML
   Server should set "Content-Type: text/xml"
-    <pre class="brush: jscript">
-        var xml = xhr.responseXML
-    </pre>
+  ```
+  var xml = xhr.responseXML
+  ```
 
 - JSON (Javascript Object Notation)
-    <pre class="brush: jscript">
-        var obj = JSON.parse(responseText);
-    </pre>
+  ```
+  var obj = JSON.parse(responseText);
+  ```
 
 - JSONP
-    <pre class="brush: jscript">
-        callback({{ "response": { "size": "370", "price":"200" }}})
-    </pre>
-
-
----
-
-
-
-# JSONP
-
-JSONP or "JSON with padding" is a complement to the base JSON data format. It provides a method to request data from a server in a different domain, something prohibited by typical web browsers because of the same origin policy.
-
-<pre class="brush: jscript">
-    callbackFunction({{ "response": { "size": "370", "price":"200" }}})
-</pre>
-
-While the padding (prefix) is typically the name of a callback function that is defined within the execution context of the browser, it may also be a variable assignment, an if statement, or any other JavaScript statement.The response to a JSONP request is not JSON and is not parsed as JSON; the returned payload can be any arbitrary JavaScript expression, and it does not need to include any JSON at all. But conventionally, it is a JavaScript fragment that invokes a function call on some JSON- formatted data.
-
-Said differently, the typical use of JSONP provides cross-domain access to an existing JSON API, by wrapping a JSON payload in a function call.
-
-
+  ```
+  callback({{ "response": { "size": "370", "price":"200" }}})
+  ```
 
 ---
-
 
 # XMLHttpRequest
 
-***XMLHttpReques*** is a JavaScript object that was designed by Microsoft and adopted by Mozilla, Apple, and Google. It's now being standardized in the W3C. It provides an easy way to retrieve data at a URL. Despite its name, ***XMLHttpRequest*** can be used to retrieve any type of data, not just XML, and it supports protocols other than HTTP (including file and ftp).
-
+**XMLHttpRequest** is a JavaScript object that was designed by Microsoft and adopted by Mozilla, Apple, and Google. It's now being standardized in the W3C. It provides an easy way to retrieve data at a URL. Despite its name, ***XMLHttpRequest*** can be used to retrieve any type of data, not just XML, and it supports protocols other than HTTP (including file and ftp).
 
 ---
 
+# XMLHttpRequest usage
 
-# XMLHttpRequest
+```
+function vote(outputElem) {
+    var xhr = new XMLHttpRequest();
 
-<pre class="brush: jscript">
-    function vote(outputElem) {  
-        var xhr = new XMLHttpRequest(); 
+    xhr.open('GET', '/api/lessons/ajax/vote');
 
-        xhr.open('GET', '/files/tutorial/ajax/xhr/vote', true); 
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState != 4) return; //return if not complete
 
-        xhr.onreadystatechange = function() { 
-            if (xhr.readyState != 4) return; //return if not complete 
+        if (xhr.status != 200) { //check request status
+            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+            return;
+        }
 
-            if (xhr.status != 200) { //check request status      
-                alert('Error ' + xhr.status + ': ' + xhr.statusText);      
-                return;   
-            } 
-
-        outputElem.innerHTML = xhr.responseText; // process result 
-        } 
-
-      outputElem.innerHTML = '...';  
-      xhr.send(); 
+        outputElem.innerHTML = xhr.responseText; // process result
     }
-</pre>
+
+  outputElem.innerHTML = '...';
+  xhr.send();
+}
+```
 
 ---
 
+# XMLHttpRequest event handlers
+
+||||
+|--- |--- |
+| readystatechange |  The readyState attribute changes value, except when it changes to UNSENT.  |
+| loadstart  |  The fetch initiates. |
+| progress |  Transmitting data. |
+| abort  |  When the fetch has been aborted. For instance, by invoking the abort() method. |
+| error  |  The fetch failed.  |
+| load |  The fetch succeeded. |
+| timeout  |  The author specified timeout has passed before the fetch completed.  |
+| loadend  |  The fetch completed (success or failure).  |
+
+---
 
 # XMLHttpRequest FormData
-.litle[
+
 FormData objects provide a way to easily construct a set of key/value pairs representing form fields and their values, which can then be easily sent using the ***XMLHttpRequest send()*** method.
-]
 
-<pre class="brush: jscript">
-    <form name="user">
-        <input type="text" name="firstname" value="Vasya"/>
-        <input type="file" name="doc"/> 
-    </form> 
-    <script type="text/javascript">
-     // create object from form 
-    var form = document.forms.user; 
-    var formData = new FormData(form);
-    // add another kay-value pair 
-    formData.append("lastname", "Pupkin"); 
-    // send
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/url"); 
-    xhr.send(formData); 
-    </script>
-</pre>
-.litle[
-***Browsers***: all, except IE< 10 
-]
-
-<!------->
-
-
-<!--# Script-->
-<!--.litle[-->
-<!--If you create a site SCRIPT referring to an external source, when added to the document, start the download process. In response, the server can send a script that contains the desired data. The main advantage of this method of communication is a cross-browser and the ability to access any domain.-->
-<!--]-->
-<!--<pre class="brush: jscript">-->
-    <!--var CallbackRegistry = {}; -->
-    <!--function scriptRequest(url, onSuccess, onError) {  -->
-        <!--var scriptOk = false;-->
-        <!--var callbackName = 'f'+String(Math.random()).slice(2);  -->
-        <!--url += url.indexOf('?') ? '&' : '?';  -->
-        <!--url += 'callback=CallbackRegistry.'+callbackName;  -->
-        <!--CallbackRegistry[callbackName] = function(data) {       -->
-           <!--scriptOk = true;     -->
-           <!--delete CallbackRegistry[callbackName];-->
-           <!--onSuccess(data);-->
-        <!--};  -->
-        <!--function checkCallback() {     -->
-            <!--if (scriptOk) return;     -->
-            <!--delete CallbackRegistry[callbackName];    -->
-            <!--onError(url);  -->
-        <!--}   -->
-        <!--var script = document.createElement('script'); -->
-        <!--//...-->
-<!--</pre>-->
-
-
-
-<!------->
-
-
-
-<!--# Script-->
-
-<!--<pre class="brush: jscript">-->
-<!--//...-->
-<!--script.onreadystatechange = function() {  -->
-    <!--if (this.readyState == 'complete' || this.readyState == 'loaded'){    -->
-                <!--this.onreadystatechange = null;        -->
-                <!--setTimeout(checkCallback, 0); -->
-        <!--}-->
-    <!--}  -->
-    <!--script.onload = script.onerror = checkCallback;  -->
-    <!--script.src = url;   -->
-    <!--document.body.appendChild(script); -->
-<!--}-->
-<!--</pre>-->
-
-
----
-
-
-
-# Iframe
-
-Iframe - the most cross-browser transport, is its main advantage. It works everywhere from IE6 to Opera Mobile.
-
-To communicate with the server creates an invisible iframe. It sends data to itself and the server writes the answer.
-
-
-
----
-
-
-
-# Iframe
-<pre class="brush: jscript">
-    var CallbackRegistry = {};
-
-    function iframeGet(url, onSuccess, onError) {  
-        var iframeOk = false; // success request status flag  
-        var iframeName = Math.random(); // set random name for iframe  
-        var iframe = createIframe(iframeName, url);
-
-        CallbackRegistry[iframeName] = function(data) {    
-            iframeOk = true;  // server success callback    
-            onSuccess(data);  
-        }   
-        iframe.onload = function() {
-            iframe.parentNode.removeChild(iframe); // remove iframe    
-            delete CallbackRegistry[iframeName];      
-            if (!iframeOk) onError();   
-        } 
-    } 
-
-   //...
-   
-</pre>
-
-
----
-
-# Iframe
-
-<pre class="brush: jscript">
-//...
-function createIframe(name, src, debug) {  
-    var tmpElem = document.createElement('div');  
-    tmpElem.innerHTML = '<iframe name="'+name+'" id="'+name+'" src="'+src+'"></iframe>';  
-    var iframe = tmpElem.firstChild;   
-    iframe.style.display = 'none';   
-    document.body.appendChild(iframe); 
-    return iframe; 
-}
-</pre>
----
-
-# Iframe ActiveX "htmlfile"
-
-<pre class="brush: jscript">
-    function iframeActiveXGet(url, onSuccess, onError) { 
-        var iframeOk = false;   
-        var iframeName = Math.random();  
-        var iframe = createActiveXFrame(iframeName, url);    
-        CallbackRegistry[iframeName] = function (data) { 
-           iframeOk = true;     
-           onSuccess(data);
-        }
-        iframe.onload = function () {  
-            iframe.parentNode.removeChild(iframe);   
-            delete CallbackRegistry[iframeName];      
-            if (!iframeOk) onError();   
-        } 
-    }
-//...
-</pre>
-
-
----
-
-
-# Iframe ActiveX "htmlfile"
-
-<pre class="brush: jscript">
-    //...
-    function createActiveXFrame(name, src) {  
-        var htmlfile = window.htmlfile;  
-        if (!htmlfile) {   
-            htmlfile = window.htmlfile = new ActiveXObject("htmlfile");   
-            htmlfile.open();    
-            htmlfile.write("<html><body></body></html>");    
-            htmlfile.close();    
-            htmlfile.parentWindow.CallbackRegistry = CallbackRegistry;  
-        }  
-        htmlfile.body.insertAdjacentHTML('beforeEnd',
-            "<iframe name='"+name+"' src='"+src+"'></iframe>");  
-        return htmlfile.body.lastChild; 
-    }
-</pre>
----
-
-# Comet
-
-Comet is a web application model in which a long-held HTTP request allows a web server to push data to a browser, without the browser explicitly requesting it.
-
-Comet is an umbrella term, encompassing multiple techniques for achieving this interaction. All these methods rely on features included by default in browsers, such as JavaScript, rather than on non- default plugins. The Comet approach differs from the original model of the web, in which a browser requests a complete web page at a time.
-
-
-
----
-
-
-
-# COMET via XMLHttpRequest
-
-Comet long polling works like any standard use of XHR. The browser makes an asynchronous request of the server, which may wait for data to be available before responding. The response can contain encoded data (typically XML or JSON) or Javascript to be executed by the client. At the end of the processing of the response, the browser creates and sends another XHR, to await the next event. Thus the browser always keeps a request outstanding with the server, to be answered as each event occurs.
-
-
-<pre class="brush: jscript">
-    function subscribe(url) {  
-        var xhr = new XMLHttpRequest();  
-        xhr.onreadystatechange = function() {    
-            if (this.readyState != 4) return; 
-
-            if (this.status == 200) {      
-                onMessage(this.responseText);   
-            } else {      
-                onError(this);    
-            } 
-            subscribe(url);  
-        }  
-        xhr.open("GET", url, true);  
-        xhr.send(''); 
-    }
-</pre>
-
----
-
-
-
-# COMET via iframe
-.litle[
-
-
-The classic style - this is when a browser creates an invisible IFRAME, leading to the service
-URL. Server receives a connection to this URL, not close it, and from time to time send
-the message blocks
 ```html
-        <script>...javascript...</script >
+<form name="user">
+    <input type="text" name="firstname" value="Vasya"/>
+    <input type="file" name="doc"/>
+</form>
 ```
-Appeared in IFRAME'e javascript immediately runs by browser, passing information to the main page.
+```
+// create object from form
+var form = document.forms.user;
+var formData = new FormData(form);
+// add another kay-value pair
+formData.append("lastname", "Pupkin");
+// send
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "/url");
+xhr.send(formData);
 ```
 
-```
--  Create
-```html
-        <iframe src="COMET_URL">
-```
-at COMET_URL server is located.
-
--  Server gives the beginning ("head") of the document and stops, leaving the connection active. 
-
--  When the server wants to send something - he writes in connection
-```html
-   <script> parent.onMessage (message) </script>
-```
-The browser immediately executes this script - so the message comes to the client.
-
--  Iframe in theory loading indefinitely. Its means an open communication channel.
-It can catch on <span class="scriptCode"> iframe.onload </span> and reopen the connection (create a new iframe).
-
+.small[
+***Browsers***: all, except IE< 10
 ]
 
-
-
-
 ---
-
-
-# EventSource
-
-The EventSource interface is used to manage server-sent events. You can set the onmessage attribute to a 
-JavaScript function to receive non-typed messages (that is, messages with no event field). You can also call 
-<span class="scriptCode"> addEventListener()</span>  to listen for events just like any other event source.
-
-***Methods***:
-.litle[
-- <span class="scriptCode">  close </span> - Closes the connection, if any, and sets the readyState attribute to CLOSED. If the connection is already closed, the method does nothing.
-
-- <span class="scriptCode"> addEventListener </span>- method for creating custom events
-]
-
-*** Attributes ***: 
-.litle[
--  <span class="scriptCode">onerror</span> [event]- A JavaScript function to call when an error occurs.
--  <span class="scriptCode">onmessage</span> [event] - A JavaScript function to call when an a message without an event field arrives.
--  <span class="scriptCode">onopen</span> [event] - A JavaScript function to call when the connection has opened.
--  <span class="scriptCode">readyState</span>  [long] - The state of the connection, must be one of CONNECTING, OPEN, or CLOSED. Read only.
-- <span class="scriptCode">url</span> [string] - Read only.
-]
-.litle[
-***Browsers***: all,except IE 
-Cross-domain: +
-]
-
-
----
-
-
-
-# EventSource
-
-Example:
-<pre class="brush: jscript">
-    var eventSource = new EventSource("/events/subscribe");
-
-    eventSource.onmessage = function(e) {  
-        console.log("Message received: " + e.data);
-    } 
-    eventSource.onopen = function(e) {
-        console.log("Connection open"); 
-    }; 
-    eventSource.onerror = function(e) {  
-        if (this.readyState == EventSource.CONNECTING) {    
-            console.log("Conection error, reconnecting...");
-        } 
-    }; 
-    eventSource.addEventListener('stop', function(e) {
-      console.log(data);  this.close();
-    }, false);
-</pre>
-
----
-
-
-
-# EventSource
-
-Data server format:
-
-<pre class="brush: jscript">
-    data: {"name":"Vasya","surname":"Pupkin"} 
-    id: 1
-
-    data: Message1 
-    id: 2
-
-    data: Message2 
-    id: 3  
-
-    event: stop 
-    data: Stop listening 
-    id: 4
-
-</pre>
-
----
-
 
 # WebSocket
 
-The WebSocket specification - developed as part of the HTML5 initiative - introduced the WebSocket JavaScript 
-interface, which defines a full-duplex single socket connection over which messages can be sent between client 
-and server. The WebSocket standard simplifies much of the complexity around bi-directional web communication 
+The WebSocket specification - developed as part of the HTML5 initiative - introduced the WebSocket JavaScript
+interface, which defines a full-duplex single socket connection over which messages can be sent between client
+and server. The WebSocket standard simplifies much of the complexity around bi-directional web communication
 and connection management.
 
-WebSocket represents the next evolutionary step in web communication compared to Comet and Ajax. 
+WebSocket represents the next evolutionary step in web communication compared to Ajax.
 
-<pre class="brush: jscript">
-    ws = new WebSocket("ws://example.com/demo"); 
+```
+ws = new WebSocket("ws://example.com/demo");
 
-    ws.onopen = function() { alert("Connection opened...") }; 
-    ws.onclose = function() { alert("Connection closed...") }; 
+ws.onopen = function() { alert("Connection opened...") };
+ws.onclose = function() { alert("Connection closed...") };
 
-    // 'onmessage' invoked every time the browser receives data 
-    ws.onmessage = function(evt) { 
-        $("#msg").append("<p>"+evt.data+"</p>");
-    }; 
-    ws.send("Hello world");
-</pre>
+// 'onmessage' invoked every time the browser receives data
+ws.onmessage = function(evt) {
+    $("#msg").append("<p>"+evt.data+"</p>");
+};
+  ws.send("Hello world");
+```
 
 ---
 
+# SOP &amp; CORS
 
+The [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) restricts how a document or script loaded from one origin can interact with a resource from another origin. It is a critical security mechanism for isolating potentially malicious documents.
 
+A resource makes a [cross-origin request](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) when it requests a resource from a different domain than the one which the first resource itself serves.
+---
 
-class: center, middle
+# JSONP
 
+**JSONP** (JSON with Padding) is a technique used by web developers to overcome the cross-domain restrictions imposed by browsers to allow data to be retrieved from systems other than the one the page was served by.
 
-##Thanks
-##The end
+```html
+<script
+  type="application/javascript"
+  src="http://server.com/api/users?callback=parseResponse">
+</script>
+```
+```
+parseResponse({ "response": { "size": "370", "price":"200" }})
+```
+```
+function parseResponse(data) {
+  console.log(data.response);
+}
+```
+
+The typical use of JSONP provides cross-domain access to an existing JSON API, by wrapping a JSON payload in a function call.
+
+---
+
+# Resources
+
+- http://json.org/
+- https://xhr.spec.whatwg.org/
+- https://en.wikipedia.org/wiki/Same-origin_policy
+- https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+- http://www.html5rocks.com/en/tutorials/cors/
 
 
 
@@ -533,6 +230,11 @@ class: center, middle
 <!-- ================== End of Slides ================== -->
 
     <script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
-    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+    <script type="text/javascript">
+      remark.create({
+        highlightStyle: 'github',
+        highlightLanguage: 'javascript'
+      });
+    </script>
 </body>
 </html>
