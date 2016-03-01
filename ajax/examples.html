@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div>
+      <button onclick="loadkitten()" type="button" name="button">Load</button>
+      <span id="progress"></span>
+    </div>
+
+    <div id="results"></div>
+
+  </body>
+  <script type="text/javascript">
+    var progress = document.getElementById('progress');
+
+    function loadkitten() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://marsweather.ingenology.com/v1/latest/?format=json');
+      // xhr.open('GET', 'http://api.open-notify.org/astros.json');
+      // xhr.open('GET', 'https://www.planwallpaper.com/static/images/magic-of-blue-universe-images.jpg');
+
+      // xhr.responseType = 'json';
+
+      xhr.onreadystatechange = function() {
+        debugger;
+
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+        if (xhr.status !== 200) {
+          console.log('Error' + xhr.status + ': ' + xhr.statusText);
+          return;
+        }
+
+        debugger;
+      }
+
+      xhr.onprogress = function(e) {
+        if (e.lengthComputable) {
+          progress.innerText = e.loaded + ' -> ' + e.total;
+        }
+      }
+
+      xhr.send();
+    }
+  </script>
+</html>
