@@ -5,20 +5,20 @@
   <script src="http://code.angularjs.org/1.3.1/angular.js"></script>
 </head>
 <body>
-  <div ng-app="app" ng-controller="employeeCtrl">
+  <div ng-app="app" ng-controller="EmployeeController">
   <p>{{name}} works for {{project}}</p>
-  <button ng-click="changeProjectToTR()">Hi Thomson Reuters!</button>
+  <button ng-click="changeProject('Thomson Reuters')">Hi Thomson Reuters!</button>
 </div>
   <script>
   angular.module('app', [])
-     .controller('employeeCtrl', function( $scope ) {
-        $scope.name = 'Taras Kharuk';
-        $scope.project = 'Adidas';
+   .controller('EmployeeController', function( $scope ) {
+      $scope.name = 'Happy Epamer';
+      $scope.project = 'Adidas';
 
-        $scope.changeProjectToTR = function() {
-          $scope.project = 'Thomson Reuters';
-        };
-      });
+      $scope.changeProject = function(project) {
+        $scope.project = project;
+      };
+    });
   </script>
 </body>
 </html>

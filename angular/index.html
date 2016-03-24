@@ -124,7 +124,6 @@ Front-end training
 # Forward Thinking
 
 - Web Components
-- Object.observe()
 - ES6
 - Angular 2.0
 
@@ -161,7 +160,7 @@ $scope.student = {
   score: 8
 };
 
-$scope.marks_map = {
+$scope.marksMap = {
   10: 'great',
   9: 'still great',
   8: 'good',
@@ -187,19 +186,19 @@ Controller is a function that is used to augment the $scope
 
 ```js
 angular.module('app', [])
- .controller('employeeCtrl', function( $scope ) {
-    $scope.name = 'Taras Kharuk';
+ .controller('EmployeeController', function( $scope ) {
+    $scope.name = 'Happy Epamer';
     $scope.project = 'Adidas';
 
-    $scope.changeProjectToTR = function() {
-      $scope.project = 'Thomson Reuters';
+    $scope.changeProject = function(project) {
+      $scope.project = project;
     };
   });
 ```
 ```html
-<div ng-app="app" ng-controller="employeeCtrl">
+<div ng-app="app" ng-controller="EmployeeController">
   <p>{{name}} works for {{project}}</p>
-  <button ng-click="changeProjectToTR()">Hi Thomson Reuters!</button>
+  <button ng-click="changeProject('Thomson Reuters')">Hi, Thomson Reuters!</button>
 </div>
 ```
 Result:<iframe src="examples/simple_controller.html" class="frame-example" frameborder="0" height="100"></iframe>
